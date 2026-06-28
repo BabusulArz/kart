@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="tr">
 <head>
    <script>
@@ -13,7 +14,6 @@
     }
   };
    </script>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dijital Kartvizit</title>
@@ -29,8 +29,6 @@
         }
 
         body {
-            /* Sigorta Sistemi: Resim linki bozulsa veya yüklenene kadar boş kalmasın diye 
-               arka plan rengini buraya da temel sigorta olarak bağlıyoruz. */
             background-color: #f4f6f9; 
             background-size: cover;
             background-position: center;
@@ -43,9 +41,15 @@
             padding: 20px;
         }
 
-        .container {
+        /* Ana İçerik Kapsayıcısı (Başlangıçta Gizli) */
+        #kartvizit-icerik {
+            display: none;
             width: 100%;
             max-width: 450px;
+        }
+
+        .container {
+            width: 100%;
             background: #ffffff;
             border-radius: 24px;
             padding: 30px 20px;
@@ -62,15 +66,24 @@
             object-fit: cover;
             border: 3px solid #fff;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            margin-bottom: 25px;
+            margin-bottom: 15px; /* Altındaki isme yaklaşması için biraz azaltıldı */
         }
-         .profile-name {
+
+        /* Yeni Eklenen İsim ve Unvan Stilleri */
+        .profile-name {
             font-size: 22px;
             font-weight: 700;
             color: #1e293b;
             margin-bottom: 4px;
-}
-       
+        }
+
+        .profile-title {
+            font-size: 14px;
+            color: #64748b; /* Gri tonu */
+            font-weight: 500;
+            margin-bottom: 25px; /* Butonlarla arasındaki mesafe */
+        }
+
         /* Buton Yapısı */
         .btn {
             display: block;
@@ -165,46 +178,106 @@
             cursor: pointer;
             color: #94a3b8;
         }
+
+        /* Güvenlik Ekranı Tasarımı */
+        #hata-ekrani {
+            display: none;
+            width: 100%;
+            max-width: 420px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .error-card {
+            background: #ffffff;
+            padding: 40px 30px;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .error-icon {
+            font-size: 48px;
+            color: #ef4444;
+            margin-bottom: 20px;
+        }
+
+        .error-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 12px;
+        }
+
+        .error-desc {
+            font-size: 15px;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .error-footer {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1.5px dashed #e2e8f0;
+            font-size: 14px;
+            font-weight: 600;
+            color: #0f172a;
+        }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <img id="profile-pic" class="profile-img" src="" alt="Profil">
-             <!-- Yeni eklenen Ad-Soyad ve Unvan Yapısı -->
+    <div id="kartvizit-icerik">
+        <div class="container">
+            <img id="profile-pic" class="profile-img" src="" alt="Profil">
+            
+            <!-- Yeni eklenen Ad-Soyad ve Unvan Yapısı -->
             <div id="profile-name" class="profile-name"></div>
             <div id="profile-title" class="profile-title"></div>
-        <a id="btn-rehber" class="btn" href="#">
-            <span class="btn-title">REHBERE KAYDET</span>
-            <span class="btn-desc">Numaramı Rehberinize Kaydedin.</span>
-        </a>
 
-        <a id="btn-whatsapp" class="btn" href="" target="_blank">
-            <span class="btn-title">WHATSAPP'TAN YAZIN</span>
-            <span class="btn-desc">Bana WhatsApp'tan Ulaşın.</span>
-        </a>
+            <a id="btn-rehber" class="btn" href="#">
+                <span class="btn-title">REHBERE KAYDET</span>
+                <span class="btn-desc">Numaramı Rehberinize Kaydedin.</span>
+            </a>
 
-        <a id="btn-instagram" class="btn" href="" target="_blank">
-            <span class="btn-title">INSTAGRAM HESABIM</span>
-            <span id="desc-instagram" class="btn-desc"></span>
-        </a>
+            <a id="btn-whatsapp" class="btn" href="" target="_blank">
+                <span class="btn-title">WHATSAPP'TAN YAZIN</span>
+                <span class="btn-desc">Bana WhatsApp'tan Ulaşın.</span>
+            </a>
 
-        <div class="btn" onclick="openModal()">
-            <span class="btn-title">ÖDEME BİLGİLERİM</span>
-            <span class="btn-desc">Ödeme Bilgilerim İçin Tıklayınız.</span>
+            <a id="btn-instagram" class="btn" href="" target="_blank">
+                <span class="btn-title">INSTAGRAM HESABIM</span>
+                <span id="desc-instagram" class="btn-desc"></span>
+            </a>
+
+            <div class="btn" onclick="openModal()">
+                <span class="btn-title">ÖDEME BİLGİLERİM</span>
+                <span class="btn-desc">Ödeme Bilgilerim İçin Tıklayınız.</span>
+            </div>
+
+            <a id="btn-adres" class="btn" href="" target="_blank">
+                <span id="title-adres" class="btn-title"></span>
+                <span id="desc-adres" class="btn-desc"></span>
+            </a>
+
+            <div class="divider"></div>
+
+            <a id="btn-website" class="btn" href="" target="_blank">
+                <span id="title-website" class="btn-title"></span>
+                <span id="desc-website" class="btn-desc"></span>
+            </a>
         </div>
+    </div>
 
-        <a id="btn-adres" class="btn" href="" target="_blank">
-            <span id="title-adres" class="btn-title"></span>
-            <span id="desc-adres" class="btn-desc"></span>
-        </a>
-
-        <div class="divider"></div>
-
-        <a id="btn-website" class="btn" href="" target="_blank">
-            <span id="title-website" class="btn-title"></span>
-            <span id="desc-website" class="btn-desc"></span>
-        </a>
+    <div id="hata-ekrani">
+        <div class="error-card">
+            <div class="error-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="error-title">GÜVENLİK UYARISI</div>
+            <div class="error-desc">Bu dijital kartvizitin tek seferlik görüntüleme süresi dolmuş veya doğrudan erişime kapatılmıştır.</div>
+            <div class="error-footer">
+                <i class="fa-solid fa-nfc-signal" style="margin-right: 5px; color:#3b82f6;"></i> 
+                Bilgileri görmek için kartı telefonunuza tekrar okutun.
+            </div>
+        </div>
     </div>
 
     <div id="payment-modal" class="modal" onclick="closeModal(event)">
@@ -216,57 +289,63 @@
     </div>
 
     <script>
+        // ==========================================
+        // YENİ NESİL GOOGLE SITES UYUMLU MOTOR
+        // ==========================================
+        window.addEventListener('DOMContentLoaded', () => {
+            let nfcKontrol = null;
+
+            try {
+                const topUrl = window.top.location.search;
+                const urlParams = new URLSearchParams(topUrl);
+                nfcKontrol = urlParams.get('source');
+            } catch (e) {
+                const urlParams = new URLSearchParams(window.location.search);
+                nfcKontrol = urlParams.get('source');
+            }
+
+            if (nfcKontrol === 'nfc') {
+                document.getElementById('kartvizit-icerik').style.display = 'block';
+                document.getElementById('hata-ekrani').style.display = 'none';
+            } else {
+                document.getElementById('kartvizit-icerik').style.display = 'none';
+                document.getElementById('hata-ekrani').style.display = 'block';
+            }
+        });
+
+        // ==========================================
+        // MÜŞTERİ AYARLARI
+        // ==========================================
         const AYARLAR = {
-            // Arka Plan Tipi: "renk" veya "resim" yazabilirsin
             arkaPlanTipi: "renk", 
-
-            // Eğer arkaPlanTipi "renk" ise veya resim linki patlarsa bu yedek sigorta rengi çalışır:
             arkaPlanRengi: "#f4f6f9", 
-
-            // Eğer arkaPlanTipi "resim" ise buradaki görsel linki arka plan olur:
             arkaPlanResmi: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1000", 
+            profilFoto: "", 
+            
+            // Yeni Eklenen Ayarlar
+            isimSoyisim: "Selman Yıldız",
+            unvanMeslek: "Kurucu & Satış Yöneticisi",
 
-            // 0. Profil Fotoğrafı Linki
-            profilFoto: "https://raw.githubusercontent.com/BabusulArz/kart/main/IMG-20260501-WA0047.jpg", 
-            isimSoyisim: "Selman Yıldı",
-            unvanMeslek: "Premium Tüccar",
-            // 1. Rehbere Kaydet Butonu Telefon Numarası Linki
             telefonNo: "+905461075789", 
-
-            // 2. WhatsApp Numarası (Ülke koduyla beraber)
             whatsappNo: "+905461075789", 
-
-            // 3. Instagram Kullanıcı Adı
             instagramKullaniciAdi: "sellmanyildiz", 
-
-            // 4. Ödeme Bilgileri Sayfasında Yazacak Yazı (HTML destekler)
             ödemeBilgileri: `
-                <p><strong>Banka:</strong> Ziraat </p>
-                <p><strong>Alıcı:</strong> Selman Yıldız </p>
-                <p><strong>IBAN:</strong> TR45 0001 0090 1081 1822 7050 01 </p>
+                <p><strong>Banka:</strong> Ziraat Bankas</p>
+                <p><strong>Alıcı:</strong> Selman Yıldız</p>
+                <p><strong>IBAN:</strong> TR00 0000 0000 0000 0000 0000 00</p>
                 <br>
                 <p>Kredi kartı ile ödeme için kurumsal link isteyiniz.</p>
             `,
-
-            // 5. Adres Butonu Ayarları
             adresBaslik: "OFİS ADRESİMİZ",
             adresAciklama: "Atatürk Mahallesi 848 Sokak No 25/2",
             adresHaritaLinki: "https://maps.google.com", 
-
-            // 6. Ayraç Altındaki Web Sitesi Butonu Ayarları
             webSitesiBaslik: "ICON® DİJİTAL KARTVİZİT",
-            webSitesiAciklama: "ICON® RESMİ WEB SİTESİ",
-            webSitesiLinki: "https://taplink.cc/icondijitalkartvizit"
+            webSitesiAciklama: "ICON Dijital Kartvizit Resmi Web Sitesi",
+            webSitesiLinki: "https://www.google.com"
         };
 
-        // ==========================================
-        // SİSTEM MOTORU & GÜVENLİK SİGORTASI
-        // ==========================================
-        
-        // Önce her ihtimale karşı yedek sigorta rengini arka plana basıyoruz
+        // Arka Plan ve Data Atamaları
         document.body.style.backgroundColor = AYARLAR.arkaPlanRengi;
-
-        // Eğer kullanıcı resim seçtiyse resmi yüklemeyi deniyor
         if (AYARLAR.arkaPlanTipi === "resim" && AYARLAR.arkaPlanResmi.trim() !== "") {
             document.body.style.backgroundImage = `url('${AYARLAR.arkaPlanResmi}')`;
         } else {
@@ -274,6 +353,11 @@
         }
 
         document.getElementById('profile-pic').src = AYARLAR.profilFoto;
+        
+        // Yeni Eklenen Verilerin Atanması
+        document.getElementById('profile-name').innerText = AYARLAR.isimSoyisim;
+        document.getElementById('profile-title').innerText = AYARLAR.unvanMeslek;
+
         document.getElementById('btn-rehber').href = "tel:" + AYARLAR.telefonNo;
         document.getElementById('btn-whatsapp').href = "https://wa.me/" + AYARLAR.whatsappNo;
         document.getElementById('btn-instagram').href = "https://instagram.com/" + AYARLAR.instagramKullaniciAdi;
@@ -292,4 +376,4 @@
         function closeModal(e) { document.getElementById('payment-modal').style.display = 'none'; }
     </script>
 </body>
-    </html>
+</html>
