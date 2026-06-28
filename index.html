@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
@@ -55,7 +55,7 @@
         /* Buton Yapısı */
         .btn {
             display: block;
-            background: #D4AF37;
+            background: #ffffff;
             border: 1.5px solid #e2e8f0;
             border-radius: 16px;
             padding: 16px;
@@ -147,47 +147,33 @@
             color: #94a3b8;
         }
     </style>
-    <script>
-  // Sayfa yüklendiğinde çalışır
-  window.onload = function() {
-    // Eğer bu oturumda kart zaten okutulup sayfa açıldıysa
-    if (sessionStorage.getItem('card_opened')) {
-      // Sayfa içeriğini temizle veya kullanıcıyı uyar/başka yere yönlendir
-      document.body.innerHTML = "<h1>Bu kart zaten bir kez okutuldu.</h1><p>Tekrar açmak için tarayıcı sekmesini kapatıp kartı yeniden okutun.</p>";
-    } else {
-      // İlk kez açılıyorsa, açıldığına dair işareti koy
-      sessionStorage.setItem('card_opened', 'true');
-    }
-  };
-    </script>
-    
 </head>
 <body>
 
-    <div class="container"
+    <div class="container">
         <img id="profile-pic" class="profile-img" src="" alt="Profil">
 
-        <a id="btn-rehber" class="btn" href="" style="background-color: #D4AF37">
-             <span class="btn-title">REHBERE KAYDET</span>
+        <a id="btn-rehber" class="btn" href="#">
+            <span class="btn-title">REHBERE KAYDET</span>
             <span class="btn-desc">Numaramı Rehberinize Kaydedin.</span>
         </a>
 
-        <a id="btn-whatsapp" class="btn" href="" target="_blank"  style="background-color: #D4AF37">
+        <a id="btn-whatsapp" class="btn" href="" target="_blank">
             <span class="btn-title">WHATSAPP'TAN YAZIN</span>
             <span class="btn-desc">Bana WhatsApp'tan Ulaşın.</span>
         </a>
 
-        <a id="btn-instagram" class="btn" href="" target="_blank"  style="background-color: #D4AF37">
+        <a id="btn-instagram" class="btn" href="" target="_blank">
             <span class="btn-title">INSTAGRAM HESABIM</span>
             <span id="desc-instagram" class="btn-desc"></span>
         </a>
 
-        <div class="btn" onclick="openModal()" style="background-color: #D4AF37">
+        <div class="btn" onclick="openModal()">
             <span class="btn-title">ÖDEME BİLGİLERİM</span>
             <span class="btn-desc">Ödeme Bilgilerim İçin Tıklayınız.</span>
         </div>
 
-        <a id="btn-adres" class="btn" href="" target="_blank" style="background-color: #D4AF37">
+        <a id="btn-adres" class="btn" href="" target="_blank">
             <span id="title-adres" class="btn-title"></span>
             <span id="desc-adres" class="btn-desc"></span>
         </a>
@@ -220,21 +206,21 @@
             arkaPlanResmi: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1000", 
 
             // 0. Profil Fotoğrafı Linki
-            profilFoto: "https://via.placeholder.com/150", 
+            profilFoto: "", 
 
             // 1. Rehbere Kaydet Butonu Telefon Numarası Linki
-            telefonNo: "+905551234567", 
+            telefonNo: "+905461075789", 
 
             // 2. WhatsApp Numarası (Ülke koduyla beraber)
-            whatsappNo: "905551234567", 
+            whatsappNo: "+905461075789", 
 
             // 3. Instagram Kullanıcı Adı
-            instagramKullaniciAdi: "tasarimci.hesabi", 
+            instagramKullaniciAdi: "@sellmanyildiz", 
 
             // 4. Ödeme Bilgileri Sayfasında Yazacak Yazı (HTML destekler)
             ödemeBilgileri: `
-                <p><strong>Banka:</strong> Garanti BBVA</p>
-                <p><strong>Alıcı:</strong> Ahmet Yılmaz</p>
+                <p><strong>Banka:</strong> Ziraat </p>
+                <p><strong>Alıcı:</strong> Selman Yıldız</p>
                 <p><strong>IBAN:</strong> TR00 0000 0000 0000 0000 0000 00</p>
                 <br>
                 <p>Kredi kartı ile ödeme için kurumsal link isteyiniz.</p>
@@ -266,9 +252,9 @@
         }
 
         document.getElementById('profile-pic').src = AYARLAR.profilFoto;
-        document.getElementById('btn-rehber').href = "tel:05461075789" + AYARLAR.telefonNo;
+        document.getElementById('btn-rehber').href = "tel:" + AYARLAR.telefonNo;
         document.getElementById('btn-whatsapp').href = "https://wa.me/" + AYARLAR.whatsappNo;
-        document.getElementById('btn-instagram').href = "https://instagram.com/" + AYARLAR.sellmanyildiz;
+        document.getElementById('btn-instagram').href = "https://instagram.com/" + AYARLAR.instagramKullaniciAdi;
         document.getElementById('desc-instagram').innerText = "@" + AYARLAR.instagramKullaniciAdi + ".";
         document.getElementById('payment-text').innerHTML = AYARLAR.ödemeBilgileri;
         
@@ -284,4 +270,4 @@
         function closeModal(e) { document.getElementById('payment-modal').style.display = 'none'; }
     </script>
 </body>
-</html>
+    </html>
