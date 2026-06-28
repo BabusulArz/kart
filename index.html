@@ -235,29 +235,6 @@
             <div id="payment-text"></div>
         </div>
     </div>
-
-    <script>
-        // ==========================================
-        // YENİ NESİL GOOGLE SITES UYUMLU MOTORR
-        // ==========================================
-        window.addEventListener('DOMContentLoaded', () => {
-            let nfcKontrol = null;
-
-            try {
-                const topUrl = window.top.location.search;
-                const urlParams = new URLSearchParams(topUrl);
-                nfcKontrol = urlParams.get('source');
-            } catch (e) {
-                const urlParams = new URLSearchParams(window.location.search);
-                nfcKontrol = urlParams.get('source');
-            }
-
-            if (nfcKontrol === 'nfc') {
-                document.getElementById('kartvizit-icerik').style.display = 'block';
-                document.getElementById('hata-ekrani').style.display = 'none';
-            } else {
-                document.getElementById('kartvizit-icerik').style.display = 'none';
-                document.getElementById('hata-ekrani').style.display = 'block';
             }
         });
 
